@@ -43,7 +43,7 @@ $ git clone https://github.com/kilbot/WooCommerce-Software-License-Manager.git w
 
 # move into the project folder and install any dependencies
 $ cd woocommerce-software-license-manager
-$ npm install
+$ sudo npm install
 
 # run development tasks
 $ grunt dev
