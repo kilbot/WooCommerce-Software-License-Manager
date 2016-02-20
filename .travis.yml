@@ -2,7 +2,7 @@ language: php
 
 php:
   - '5.4'
-  - '7.0'
+#  - '7.0'
 
 env:
   - WP_VERSION=latest WP_MULTISITE=0
@@ -24,13 +24,13 @@ install:
   - sudo apt-get update
   - sudo apt-get install apache2 libapache2-mod-fastcgi
   # enable php-fpm, try both dirs for php5 and php7
-  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf 2>/dev/null
-  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf 2>/dev/null
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+#  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf 2>/dev/null
   - sudo a2enmod rewrite actions fastcgi alias
   - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
   # configure apache virtual hosts
-  - sudo cp -f ./wp-content/plugins/woocommerce-pos/tests/integration/php/bin/travis-ci-apache /etc/apache2/sites-available/default
+  - sudo cp -f ./wp-content/plugins/woocommerce-software-license-manager/tests/php/integration/bin/travis-ci-apache /etc/apache2/sites-available/default
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
   - sudo service apache2 restart
   # install wp-cli
@@ -38,7 +38,7 @@ install:
   - chmod +x wp-cli.phar
   - sudo mv wp-cli.phar /usr/local/bin/wp
   - wp --info
-  - wp core config --dbname=woopos_tests --dbuser=root
+  - wp core config --dbname=tests --dbuser=root
   - wp core install --url=local.wordpress.dev --title=WooSLM --admin_user=admin --admin_password=password --admin_email=test@wooslm.com
   - wp plugin activate woocommerce-software-license-manager
   - wp plugin install woocommerce --activate
