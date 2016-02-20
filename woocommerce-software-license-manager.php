@@ -30,7 +30,7 @@ function autoload( $cls ) {
     return;
 
   $cls = str_replace( __NAMESPACE__, '', $cls );
-  $path = PLUGIN_PATH . 'includes' . str_replace( '\\', DIRECTORY_SEPARATOR, $cls ) . '.php';
+  $path = PLUGIN_PATH . 'includes' . str_replace( '\\', DIRECTORY_SEPARATOR, strtolower( $cls ) ) . '.php';
   require_once( $path );
 }
 
