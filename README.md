@@ -32,7 +32,7 @@ $ wp plugin install wordpress-importer --activate
 $ wp import wp-content/plugins/woocommerce/dummy-data/dummy-data.xml --authors=create
 ```
 
-You now should have a WordPress install available at `http://local.wordpress.dev` with a dummy WooCommerce store at `http://local.wordpress.dev`. Now it's time to clone the WooCommerce Software License Manager project and start developing!
+You now should have a WordPress install available at `http://local.wordpress.dev` with a dummy WooCommerce store at `http://local.wordpress.dev/shop`. Now it's time to clone the WooCommerce Software License Manager project and start developing!
 
 ```bash
 # make sure you're in the plugins folder
