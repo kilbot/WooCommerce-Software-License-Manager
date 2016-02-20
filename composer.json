@@ -27,6 +27,6 @@
   "require-dev": {
     "10up/wp_mock": "dev-master",
     "guzzlehttp/guzzle": "^6.1",
-    "php": ">=5.5.0",
+    "php": ">=5.5.0"
   }
 }
