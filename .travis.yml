@@ -16,7 +16,7 @@ before_install:
 
 install:
   # install wordpress & woocommerce
-  - bash tests/unit/php/bin/install-travis-wp-tests.sh woopos_tests root '' localhost $WP_VERSION
+  - bash tests/php/unit/bin/install.sh tests root '' localhost $WP_VERSION
   - mkdir /tmp/wordpress/wp-content/plugins/woocommerce-software-license-manager/
   - mv * .[^.]* /tmp/wordpress/wp-content/plugins/woocommerce-software-license-manager/
   - mv /tmp/wordpress/* ./

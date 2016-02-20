@@ -32,10 +32,10 @@ module.exports = function(grunt) {
   });
 
   // test
-  grunt.registerTask('test', 'Run unit tests', ['shell']);
+  grunt.registerTask('test', 'Run unit tests', ['shell:unit_tests', 'shell:unit_tests']);
 
   // dev
-  grunt.registerTask('dev', 'Development build', ['test', 'watch']);
+  grunt.registerTask('dev', 'Development build', ['shell:install', 'test', 'watch']);
 
   // deploy
   grunt.registerTask('deploy', 'Production build', ['']);
