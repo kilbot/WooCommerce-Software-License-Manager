@@ -13,6 +13,7 @@ WP_VERSION=${5-latest}
 WC_VERSION=${6-latest}
 
 WP_TESTS_DIR=/tmp/wordpress-tests-lib
+WP_TEMP_DIR=/tmp/wordpress
 WP_CORE_DIR=${TRAVIS_BUILD_DIR-/tmp/wordpress/}
 
 download() {
@@ -41,11 +42,11 @@ set -ex
 
 install_wp() {
 
-  if [ -d $WP_CORE_DIR ]; then
+  if [ -d $WP_TEMP_DIR ]; then
     return;
   fi
 
-  mkdir -p $WP_CORE_DIR
+  mkdir -p $WP_TEMP_DIR
 
   if [ $WP_VERSION == 'latest' ]; then
     local ARCHIVE_NAME='latest'
@@ -54,9 +55,9 @@ install_wp() {
   fi
 
   download https://wordpress.org/${ARCHIVE_NAME}.tar.gz  /tmp/wordpress.tar.gz
-  tar --strip-components=1 -zxmf /tmp/wordpress.tar.gz -C $WP_CORE_DIR
+  tar --strip-components=1 -zxmf /tmp/wordpress.tar.gz -C $WP_TEMP_DIR
 
-  download https://raw.github.com/markoheijnen/wp-mysqli/master/db.php $WP_CORE_DIR/wp-content/db.php
+  download https://raw.github.com/markoheijnen/wp-mysqli/master/db.php $WP_TEMP_DIR/wp-content/db.php
 }
 
 install_test_suite() {
