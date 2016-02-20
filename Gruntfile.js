@@ -32,7 +32,7 @@ module.exports = function(grunt) {
   });
 
   // test
-  grunt.registerTask('test', 'Run unit tests', ['shell:unit_tests', 'shell:unit_tests']);
+  grunt.registerTask('test', 'Run unit tests', ['shell:unit_tests', 'shell:integration_tests']);
 
   // dev
   grunt.registerTask('dev', 'Development build', ['shell:install', 'test', 'watch']);
