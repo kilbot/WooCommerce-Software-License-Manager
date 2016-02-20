@@ -1,0 +1,40 @@
+{
+  "name": "woocommerce-software-license-manager",
+  "version": "0.0.1",
+  "description": "A license management solution for selling software with WooCommerce",
+  "scripts": {
+    "test": "grunt dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kilbot/WooCommerce-Software-License-Manager.git"
+  },
+  "keywords": [
+    "wordpress",
+    "woocommerce",
+    "software",
+    "ecommerce",
+    "license"
+  ],
+  "contributors": [
+    {
+      "name": "kilbot",
+      "url": "https://github.com/kilbot"
+    },
+    {
+      "name": "Vedran",
+      "url": "https://github.com/vdrnn"
+    }
+  ],
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/kilbot/WooCommerce-Software-License-Manager/issues"
+  },
+  "homepage": "https://github.com/kilbot/WooCommerce-Software-License-Manager#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-shell": "^1.1.2",
+    "load-grunt-tasks": "^3.4.0"
+  }
+}
