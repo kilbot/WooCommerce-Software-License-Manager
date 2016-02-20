@@ -10,25 +10,34 @@ namespace WC_SLM;
 class Activator {
 
   // minimum requirements
-  const WP_MIN_VERSION = '4.4.0';
-  const WC_MIN_VERSION = '2.5.0';
+  const WP_MIN_VERSION = '4.4';
+  const WC_MIN_VERSION = '2.5';
   const PHP_MIN_VERSION = '5.4';
 
+  /* @var Admin Notices */
+  private $notices;
+
   /**
-   * @param $file
+   * Activator constructor
+   * @param $notices
    */
-  public function __construct( $file ) {
-    register_activation_hook( $file, array( $this, 'activate' ) );
+  public function __construct( $notices ) {
+    $this->notices = $notices;
+    register_activation_hook( PLUGIN_FILE, array( $this, 'activate' ) );
     add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
     add_action( 'plugins_loaded', array( $this, 'run' ) );
   }
-
 
   /**
    * Checks for valid install and begins execution of the plugin.
    */
   public function run(){
-    new Setup();
+    global $wp_version;
+
+    if( $this->check_requirements( phpversion(), self::PHP_MIN_VERSION, 'PHP' )
+      && $this->check_requirements( $wp_version, self::WP_MIN_VERSION, 'WordPress' )
+      && $this->check_requirements( WC()->version, self::WC_MIN_VERSION, 'WooCommerce' ) )
+      new Setup();
   }
 
   /**
@@ -92,25 +101,19 @@ class Activator {
 
   /**
    * Checks that the WordPress setup meets the plugin requirements
-   * @global string $wp_version
-   * @return boolean
+   * @param $version
+   * @param $require
+   * @param string $label
+   * @return bool
    */
-  private function check_requirements() {
-    global $wp_version;
-    if ( ! version_compare( $wp_version, $this->wp_version, '>=' ) ) {
-      add_action( 'admin_notices', array( $this, 'display_notice' ) );
+  public function check_requirements( $version, $require, $label = '' ) {
+    if ( ! version_compare( $version, $require, '>=' ) ) {
+      $message = sprintf( __('<strong>WooCommerce Software License Manager</strong> requires %s %s or higher', 'wc-slm' ), $label, $require );
+      $this->notices->add( $message );
       return false;
     }
 
     return true;
-  }
-
-  /**
-   * Display the requirement notice
-   * @static
-   */
-  public function display_notice() {
-    echo '<div id="message" class="error"><p><strong></strong></p></div>';
   }
 
 }

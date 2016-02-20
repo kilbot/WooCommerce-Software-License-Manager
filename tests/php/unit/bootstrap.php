@@ -1,36 +1,38 @@
 <?php
 
-  class Unit_Test_WC_SLM {
+namespace WC_SLM;
 
-    private $wp_tests_dir;
+class Unit_Tests {
 
-    public function __construct(){
+  private $wp_tests_dir;
 
-      ini_set( 'display_errors','on' );
-      error_reporting( E_ALL );
+  public function __construct(){
 
-      $this->wp_tests_dir = '/tmp/wordpress-tests-lib';
-      $this->includes();
+    ini_set( 'display_errors','on' );
+    error_reporting( E_ALL );
 
-      require_once $this->wp_tests_dir . '/includes/functions.php';
+    $this->wp_tests_dir = '/tmp/wordpress-tests-lib';
+    $this->includes();
 
-      tests_add_filter( 'muplugins_loaded', array( $this, 'load_wc_pos' ) );
+    require_once $this->wp_tests_dir . '/includes/functions.php';
 
-      require_once $this->wp_tests_dir . '/includes/bootstrap.php';
-    }
+    tests_add_filter( 'muplugins_loaded', array( $this, 'load' ) );
 
-    public function load_wc_pos() {
-      require_once WP_CONTENT_DIR . '/plugins/woocommerce/woocommerce.php';
-      require_once dirname( __FILE__ ) . '/../../../woocommerce-pos.php';
-    }
-
-    /**
-     *
-     */
-    public function includes(){
-
-    }
-
+    require_once $this->wp_tests_dir . '/includes/bootstrap.php';
   }
 
-  new Unit_Test_WC_SLM();
+  public function load() {
+    require_once \WP_CONTENT_DIR . '/plugins/woocommerce/woocommerce.php';
+    require_once dirname( __FILE__ ) . '/../../../woocommerce-software-license-manager.php';
+  }
+
+  /**
+   *
+   */
+  public function includes(){
+    require_once 'vendor/autoload.php';
+  }
+
+}
+
+new Unit_Tests();

@@ -1,0 +1,15 @@
+<phpunit
+    bootstrap="bootstrap.php"
+    backupGlobals="false"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    verbose="true"
+>
+  <testsuites>
+    <testsuite name="WooCommerce Software License Manager Unit Tests">
+      <directory prefix="test-" suffix=".php">./spec/</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

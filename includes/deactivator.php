@@ -10,10 +10,10 @@ namespace WC_SLM;
 class Deactivator {
 
   /**
-   * @param $file
+   *
    */
-  public function __construct( $file ){
-    register_deactivation_hook( $file, array( $this, 'deactivate' ) );
+  public function __construct(){
+    register_deactivation_hook( PLUGIN_FILE, array( $this, 'deactivate' ) );
   }
 
   /**

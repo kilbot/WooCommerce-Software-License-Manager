@@ -18,11 +18,15 @@
   "authors": [
     {
       "name": "kilbot",
-      "url": "https://github.com/kilbot"
+      "homepage": "https://github.com/kilbot"
     },
     {
       "name": "Vedran",
-      "url": "https://github.com/vdrnn"
+      "homepage": "https://github.com/vdrnn"
     }
-  ]
+  ],
+  "require-dev": {
+    "10up/wp_mock": "dev-master",
+    "guzzlehttp/guzzle": "^6.1"
+  }
 }

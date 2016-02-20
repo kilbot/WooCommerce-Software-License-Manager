@@ -5,22 +5,27 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    // watch for changes and trigger sass, jshint etc
+    files: {
+      php: ['**/*.php', '!vendor/**']
+    },
+
+    // watch for changes and trigger task
     watch: {
       php: {
-        files: ['/**/*.php' ],
-        tasks: ['shell:phpunit']
+        files: ['<%= files.php %>'],
+        tasks: ['shell:unit_tests', 'shell:integration_tests']
       }
     },
 
     shell: {
-      phpshell: {
-        multiple: {
-          command: [
-            'phpunit',
-            'phpunit'
-          ].join('&&')
-        }
+      install: {
+        command: 'bash tests/php/unit/bin/install.sh tests root root localhost latest'
+      },
+      unit_tests: {
+        command: 'phpunit -c tests/php/unit/phpunit.xml'
+      },
+      integration_tests: {
+        command: 'phpunit -c tests/php/integration/phpunit.xml'
       }
     }
 

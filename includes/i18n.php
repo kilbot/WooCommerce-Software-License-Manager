@@ -9,7 +9,7 @@ namespace WC_SLM;
 class i18n {
 
   /**
-   * Constructor
+   * i18n constructor
    */
   public function __construct() {
     $this->load_plugin_textdomain();

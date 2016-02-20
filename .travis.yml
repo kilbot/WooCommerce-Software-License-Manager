@@ -1,0 +1,56 @@
+language: php
+
+php:
+  - '5.4'
+  - '7.0'
+
+env:
+  - WP_VERSION=latest WP_MULTISITE=0
+  #    - WP_VERSION=latest WP_MULTISITE=1
+  #    - WP_VERSION=3.8 WP_MULTISITE=0
+  #    - WP_VERSION=3.8 WP_MULTISITE=1
+
+before_install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install stable
+  - git submodule update --init --recursive
+
+install:
+  # install wordpress & woocommerce
+  - bash tests/unit/php/bin/install-travis-wp-tests.sh woopos_tests root '' localhost $WP_VERSION
+  - mkdir /tmp/wordpress/wp-content/plugins/woocommerce-software-license-manager/
+  - mv * .[^.]* /tmp/wordpress/wp-content/plugins/woocommerce-software-license-manager/
+  - mv /tmp/wordpress/* ./
+  # install apache
+  - sudo apt-get update
+  - sudo apt-get install apache2 libapache2-mod-fastcgi
+  # enable php-fpm, try both dirs for php5 and php7
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf 2>/dev/null || :
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf 2>/dev/null || :
+  - sudo a2enmod rewrite actions fastcgi alias
+  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+  # configure apache virtual hosts
+  - sudo cp -f ./wp-content/plugins/woocommerce-pos/tests/integration/php/bin/travis-ci-apache /etc/apache2/sites-available/default
+  - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
+  - sudo service apache2 restart
+  # install wp-cli
+  - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+  - chmod +x wp-cli.phar
+  - sudo mv wp-cli.phar /usr/local/bin/wp
+  - wp --info
+  - wp core config --dbname=woopos_tests --dbuser=root
+  - wp core install --url=local.wordpress.dev --title=WooSLM --admin_user=admin --admin_password=password --admin_email=test@wooslm.com
+  - wp plugin activate woocommerce-software-license-manager
+  - wp plugin install woocommerce --activate
+  - wp plugin install wordpress-importer --activate
+  - wp import wp-content/plugins/woocommerce/dummy-data/dummy-data.xml --authors=create
+  - cp wp-content/plugins/woocommerce-software-license-manager/tests/php/integration/bin/wp-cli.yml ./
+  - wp rewrite flush --hard
+  # install grunt-cli
+  - cd wp-content/plugins/woocommerce-software-license-manager/
+  - npm install -g grunt-cli
+  - npm install
+  - composer install
+
+script:
+  - grunt test
