@@ -33,10 +33,11 @@ class Activator {
    */
   public function run(){
     global $wp_version;
+    $wc_version = defined('\WC_VERSION') ? \WC_VERSION : '';
 
     if( $this->check_requirements( phpversion(), self::PHP_MIN_VERSION, 'PHP' )
       && $this->check_requirements( $wp_version, self::WP_MIN_VERSION, 'WordPress' )
-      && $this->check_requirements( WC()->version, self::WC_MIN_VERSION, 'WooCommerce' ) )
+      && $this->check_requirements( $wc_version, self::WC_MIN_VERSION, 'WooCommerce' ) )
       new Setup();
   }
 
@@ -107,7 +108,7 @@ class Activator {
    * @return bool
    */
   public function check_requirements( $version, $require, $label = '' ) {
-    if ( ! version_compare( $version, $require, '>=' ) ) {
+    if ( $version == '' || ! version_compare( $version, $require, '>=' ) ) {
       $message = sprintf( __('<strong>WooCommerce Software License Manager</strong> requires %s %s or higher', 'wc-slm' ), $label, $require );
       $this->notices->add( $message );
       return false;
