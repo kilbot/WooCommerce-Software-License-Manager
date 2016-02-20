@@ -13,8 +13,8 @@ WP_VERSION=${5-latest}
 WC_VERSION=${6-latest}
 
 WP_TESTS_DIR=/tmp/wordpress-tests-lib
-WP_TEMP_DIR=/tmp/wordpress
-WP_CORE_DIR=${TRAVIS_BUILD_DIR-/tmp/wordpress/}
+WP_TEMP_DIR=/tmp/wordpress/
+WP_CORE_DIR=${TRAVIS_BUILD_DIR-/tmp/wordpress/}/
 
 download() {
   if [ `which curl` ]; then
