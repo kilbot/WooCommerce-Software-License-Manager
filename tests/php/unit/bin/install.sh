@@ -111,8 +111,8 @@ install_db() {
 
 install_woocommerce() {
 
-  # set up woocommerce if it doesn't yet exist
-  if [ ! -d $$WP_CORE_DIR/wp-content/plugins/woocommerce ]; then
+  # set up woocommerce if it doesn't exist && no travis build
+  if [ ! -d $WP_CORE_DIR/wp-content/plugins/woocommerce ] && [ ! $TRAVIS_BUILD_DIR ]; then
 
     if [ $WC_VERSION == 'latest' ]; then
      local ARCHIVE_NAME='woocommerce.zip'

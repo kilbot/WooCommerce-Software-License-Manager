@@ -15,7 +15,7 @@ class API {
    * API constructor.
    */
   public function __construct() {
-
+    add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
   }
 
   /**
@@ -25,6 +25,13 @@ class API {
     $version = substr( self::VERSION, 0, 1 );
     $url = get_home_url( null, "wc-slm/v{$version}/", is_ssl() ? 'https' : 'http' );
     return $url;
+  }
+
+  /**
+   *
+   */
+  public function rest_api_init(){
+
   }
 
 }
