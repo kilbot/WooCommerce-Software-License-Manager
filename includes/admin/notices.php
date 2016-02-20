@@ -34,8 +34,8 @@ class Notices {
    * Display the admin notices
    */
   public function admin_notices() {
-    if( !empty( $notices ) ) {
-      foreach( $notices as $notice ) {
+    if( ! empty( $this->notices ) ) {
+      foreach( $this->notices as $notice ) {
         echo '<div class="' . esc_attr( $notice['type'] ) . '">
           <p>'. wp_kses( $notice['message'], wp_kses_allowed_html( 'post' ) ) .'</p>
         </div>';
