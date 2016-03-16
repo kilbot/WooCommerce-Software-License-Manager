@@ -1,9 +1,16 @@
 # WooCommerce Software License Manager
 
-[![Build Status](https://travis-ci.org/kilbot/WooCommerce-Software-License-Manager.svg)](https://travis-ci.org/kilbot/WooCommerce-Software-License-Manager) 
+[![Build Status](https://travis-ci.org/kilbot/WooCommerce-Software-License-Manager.svg)](https://travis-ci.org/kilbot/WooCommerce-Software-License-Manager)
 [![Join the chat at https://gitter.im/kilbot/WooCommerce-Software-License-Manager](https://badges.gitter.im/kilbot/WooCommerce-Software-License-Manager.svg)](https://gitter.im/kilbot/WooCommerce-Software-License-Manager?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A license management solution for selling software with WooCommerce
+
+## Requirements
+
+| Prerequisite    | How to check | How to install
+| --------------- | ------------ | ------------- |
+| grunt           | `grunt --version` | `npm install -g grunt-cli` |
+| PHPUnit         | `phpunit --version` | [phpunit.de](https://phpunit.de/) |
 
 ## Developing locally
 
