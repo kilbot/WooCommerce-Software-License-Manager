@@ -26,9 +26,10 @@ spl_autoload_register( __NAMESPACE__ . '\\autoload' );
 
 function autoload( $cls ) {
   $cls = ltrim( $cls, '\\' );
-  if ( strpos( $cls, __NAMESPACE__ ) !== 0 )
+  if( substr( $cls, 0, strlen( __NAMESPACE__ ) ) !== __NAMESPACE__ )
     return;
 
+  // @todo: remove first WC_SLM, convert _ to -, convert to lowercase
   $cls = str_replace( __NAMESPACE__, '', $cls );
   $path = PLUGIN_PATH . 'includes' . str_replace( '\\', DIRECTORY_SEPARATOR, strtolower( $cls ) ) . '.php';
   require_once( $path );

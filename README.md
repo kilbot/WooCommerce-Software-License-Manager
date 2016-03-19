@@ -5,13 +5,6 @@
 
 A license management solution for selling software with WooCommerce
 
-## Requirements
-
-| Prerequisite    | How to check | How to install
-| --------------- | ------------ | ------------- |
-| grunt           | `grunt --version` | `npm install -g grunt-cli` |
-| PHPUnit         | `phpunit --version` | [phpunit.de](https://phpunit.de/) |
-
 ## Developing locally
 
 WooCommerce Software License Manager is a WordPress plugin which requires [WordPress](http://wordpress.org) and [WooCommerce](wordpress.org/plugins/woocommerce).
@@ -56,3 +49,16 @@ $ composer install
 # run development tasks (use --force if you are fixing a test)
 $ grunt dev
 ```
+
+## Requirements
+
+[VVV](https://github.com/Varying-Vagrant-Vagrants/VVV) comes with [all the requirements](https://github.com/Varying-Vagrant-Vagrants/VVV#what-do-you-get) for developing this plugin, this is why it is the recommended development environment for beginners. 
+If you already have a local server please ensure it has the following requirements to successfully build and test the project.
+
+| Prerequisite    | How to check | How to install
+| --------------- | ------------ | ------------- |
+| PHP 5.5+        | `php --version` | [php.net](http://php.net/manual/en/install.php) |
+| PHPUnit         | `phpunit --version` | [phpunit.de](https://phpunit.de/) |
+| composer        | `composer --version` | [getcomposer.org](https://getcomposer.org/doc/00-intro.md) |
+| node            | `node --version` | [nodejs.org](https://nodejs.org) |
+| grunt           | `grunt --version` | `npm install -g grunt-cli` |
