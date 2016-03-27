@@ -38,8 +38,9 @@ You now should have a WordPress install available at `http://local.wordpress.dev
 # make sure you're in the plugins folder
 $ cd wp-content/plugins/
 
-# clone the project
+# clone and activate the project
 $ git clone https://github.com/kilbot/WooCommerce-Software-License-Manager.git woocommerce-software-license-manager
+$ wp plugin activate woocommerce-software-license-manager
 
 # move into the project folder and install any dependencies
 $ cd woocommerce-software-license-manager
