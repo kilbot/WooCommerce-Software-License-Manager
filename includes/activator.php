@@ -14,15 +14,11 @@ class Activator {
   const WC_MIN_VERSION = '2.5';
   const PHP_MIN_VERSION = '5.4';
 
-  /* @var Admin Notices */
-  private $notices;
-
   /**
    * Activator constructor
    * @param $notices
    */
   public function __construct( $notices ) {
-    $this->notices = $notices;
     register_activation_hook( PLUGIN_FILE, array( $this, 'activate' ) );
     add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
     add_action( 'plugins_loaded', array( $this, 'run' ) );
@@ -110,7 +106,7 @@ class Activator {
   public function check_requirements( $version, $require, $label = '' ) {
     if ( $version == '' || ! version_compare( $version, $require, '>=' ) ) {
       $message = sprintf( __('<strong>WooCommerce Software License Manager</strong> requires %s %s or higher', 'wc-slm' ), $label, $require );
-      $this->notices->add( $message );
+      Admin\Notices::add( $message );
       return false;
     }
 

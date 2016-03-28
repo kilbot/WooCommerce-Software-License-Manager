@@ -6,11 +6,6 @@
 
 namespace WC_SLM;
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-  exit;
-}
-
 class Setup {
 
   /**
@@ -31,12 +26,12 @@ class Setup {
 
     // ajax only
     if ( is_admin() && ( defined('DOING_AJAX') && DOING_AJAX ) ) {
-
+      
     }
 
     // admin only
     if ( is_admin() && !( defined('DOING_AJAX') && DOING_AJAX ) ) {
-
+      new Admin();
     }
 
     // frontend only

@@ -36,7 +36,7 @@ function autoload( $cls ) {
 }
 
 // activate plugin
-new Activator( new Admin\Notices() );
+new Activator();
 
 // deactivate plugin
 new Deactivator();
