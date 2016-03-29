@@ -19,11 +19,20 @@ class API {
   }
 
   /**
+   *
+   */
+  static private function get_api_namespace(){
+    $version = substr( self::VERSION, 0, 1 );
+    return 'wc-slm/v' . $version;
+  }
+
+  /**
+   * @param string $path
    * @return string
    */
-  static public function get_api_url(){
-    $version = substr( self::VERSION, 0, 1 );
-    $url = get_home_url( null, "wc-slm/v{$version}/", is_ssl() ? 'https' : 'http' );
+  static public function get_api_url($path = ''){
+    $endpoint = 'wp-json/' . self::get_api_namespace() . '/' . trim($path, '/');
+    $url = get_home_url( null, $endpoint, is_ssl() ? 'https' : 'http' );
     return $url;
   }
 
@@ -31,7 +40,7 @@ class API {
    *
    */
   public function rest_api_init(){
-
+    register_rest_route( self::get_api_namespace(), '/' );
   }
 
 }

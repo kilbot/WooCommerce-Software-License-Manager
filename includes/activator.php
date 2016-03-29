@@ -16,9 +16,8 @@ class Activator {
 
   /**
    * Activator constructor
-   * @param $notices
    */
-  public function __construct( $notices ) {
+  public function __construct() {
     register_activation_hook( PLUGIN_FILE, array( $this, 'activate' ) );
     add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
     add_action( 'plugins_loaded', array( $this, 'run' ) );

@@ -17,4 +17,9 @@ class API extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(200, $response->getStatusCode());
   }
 
+  public function test_get_licenses() {
+    $response = $this->client->get( \WC_SLM\API::get_api_url('licenses') );
+    $this->assertEquals(200, $response->getStatusCode());
+  }
+
 }
